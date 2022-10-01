@@ -1,0 +1,12 @@
+.error{
+    color: red;
+}
+
+.toast-success,
+.toast-error:nth-child(1) {
+    /*margin-top: 50px !important;*/
+}
+
+.kt-content {
+    padding: 0px 0 !important;
+}
