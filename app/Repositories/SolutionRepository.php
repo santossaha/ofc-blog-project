@@ -70,7 +70,7 @@ class SolutionRepository
                         'portfolio_id' => $solutionId,
                         'title' => $request->q_title[$i],
                         'description' => $request->q_description[$i],
-                        'type' => SolutionRepository::PORTFOLIO_TYPE,
+                        'type' => self::PORTFOLIO_TYPE,
                         'image' =>  $request->q_image ? storeImage($request->q_image[$i], 'solution/solution') : ' ',
                     ];
                     PortfolioSolution::create($arrSolution);
@@ -141,7 +141,6 @@ class SolutionRepository
        }
 
        if ($request->hasFile('about_image')) {
-           dd('update');
            deleteImage($solution->about_image);
            $about_image = storeImage($request->about_image, 'solution/about');
            $input['about_image'] = $about_image;
@@ -171,32 +170,31 @@ class SolutionRepository
         }
 
         //Update Solution title description and image
-       if(isset($request->q_title)){
-           $titleCount = count($request->q_title);
-           if($titleCount >= 1){
-               for ($i= 0; $i < $titleCount; $i++){
-                   if(!empty($request->solution_id[$i])){
-                       $objSol = PortfolioSolution::findOrFail($request->solution_id[$i]);
-                       $arrSol = [
-                           'title' => $request->q_title[$i],
-                           'description' => $request->q_description[$i],
-                       ];
-                       if(!empty($request->q_image[$i])){
-                           deleteImage($objSol->image);
-                           $arrSol['image'] = storeImage($request->q_image[$i],'solution/solution');
-                       }
-                       $objSol->update($arrSol);
-                   }else{
-                       $arrSol = [
-                           'portfolio_id' => $id,
-                           'title' => $request->q_title[$i],
-                           'description' => $request->q_description[$i],
-                       ];
-                       if(!empty($request->q_image[$i])){
-                           $arrSol['image'] = storeImage($request->q_image[$i], 'solution/solution');
-                       }
-                       PortfolioSolution::create($arrSol);
+       $mxVal = getRequestCount($request->q_title,$request->q_description, $request->q_image);
+       if($mxVal >= 1){
+           for ($i= 0; $i < $mxVal; $i++){
+               if(!empty($request->solution_id[$i])){
+                   $objSol = PortfolioSolution::findOrFail($request->solution_id[$i]);
+                   $arrSol = [
+                       'title' => $request->q_title[$i],
+                       'description' => $request->q_description[$i],
+                   ];
+                   if(!empty($request->q_image[$i])){
+                       deleteImage($objSol->image);
+                       $arrSol['image'] = storeImage($request->q_image[$i],'solution/solution');
                    }
+                   $objSol->update($arrSol);
+               }else{
+                   $arrSol = [
+                       'portfolio_id' => $id,
+                       'title' => $request->q_title[$i],
+                       'description' => $request->q_description[$i],
+                       'type' => self::PORTFOLIO_TYPE,
+                   ];
+                   if(!empty($request->q_image[$i])){
+                       $arrSol['image'] = storeImage($request->q_image[$i], 'solution/solution');
+                   }
+                   PortfolioSolution::create($arrSol);
                }
            }
        }
@@ -215,32 +213,30 @@ class SolutionRepository
         }
 
         //Update Feature title description and image
-        if(isset($request->f_title)){
-            $titleCount = count($request->f_title);
-            if($titleCount >= 1){
-                for ($i= 0; $i < $titleCount; $i++){
-                    if(!empty($request->feature_id[$i])){
-                        $objSol = FeatureList::findOrFail($request->feature_id[$i]);
-                        $arrSol = [
-                            'title' => $request->f_title[$i],
-                            'description' => $request->f_description[$i],
-                        ];
-                        if(!empty($request->f_image[$i])){
-                            deleteImage($objSol->image);
-                            $arrSol['image'] = storeImage($request->f_image[$i],'solution/feature');
-                        }
-                        $objSol->update($arrSol);
-                    }else{
-                        $arrSol = [
-                            'solution_id' => $id,
-                            'title' => $request->f_title[$i],
-                            'description' => $request->f_description[$i],
-                        ];
-                        if(!empty($request->f_image[$i])){
-                            $arrSol['image'] = storeImage($request->f_image[$i], 'solution/feature');
-                        }
-                        FeatureList::create($arrSol);
+        $mxVal = getRequestCount($request->f_title,$request->f_description, $request->f_image);
+        if($mxVal >= 1){
+            for ($i= 0; $i < $mxVal; $i++){
+                if(!empty($request->feature_id[$i])){
+                    $objSol = FeatureList::findOrFail($request->feature_id[$i]);
+                    $arrSol = [
+                        'title' => $request->f_title[$i],
+                        'description' => $request->f_description[$i],
+                    ];
+                    if(!empty($request->f_image[$i])){
+                        deleteImage($objSol->image);
+                        $arrSol['image'] = storeImage($request->f_image[$i],'solution/feature');
                     }
+                    $objSol->update($arrSol);
+                }else{
+                    $arrSol = [
+                        'solution_id' => $id,
+                        'title' => $request->f_title[$i],
+                        'description' => $request->f_description[$i],
+                    ];
+                    if(!empty($request->f_image[$i])){
+                        $arrSol['image'] = storeImage($request->f_image[$i], 'solution/feature');
+                    }
+                    FeatureList::create($arrSol);
                 }
             }
         }
@@ -259,32 +255,30 @@ class SolutionRepository
         }
 
         //Update Screenshot title description and image
-        if(isset($request->s_title)){
-            $titleCount = count($request->s_title);
-            if($titleCount >= 1){
-                for ($i= 0; $i < $titleCount; $i++){
-                    if(!empty($request->screenshot_id[$i])){
-                        $objSol = SolutionScreenshot::findOrFail($request->screenshot_id[$i]);
-                        $arrSol = [
-                            'title' => $request->s_title[$i],
-                            'description' => $request->s_description[$i],
-                        ];
-                        if(!empty($request->s_image[$i])){
-                            deleteImage($objSol->image);
-                            $arrSol['image'] = storeImage($request->s_image[$i],'solution/screen-short');
-                        }
-                        $objSol->update($arrSol);
-                    }else{
-                        $arrSol = [
-                            'solution_id' => $id,
-                            'title' => $request->s_title[$i],
-                            'description' => $request->s_description[$i],
-                        ];
-                        if(!empty($request->s_image[$i])){
-                            $arrSol['image'] = storeImage($request->s_image[$i], 'solution/screen-short');
-                        }
-                        SolutionScreenshot::create($arrSol);
+        $mxVal = getRequestCount($request->s_title,$request->s_description, $request->s_image);
+        if($mxVal >= 1){
+            for ($i= 0; $i < $mxVal; $i++){
+                if(!empty($request->screenshot_id[$i])){
+                    $objSol = SolutionScreenshot::findOrFail($request->screenshot_id[$i]);
+                    $arrSol = [
+                        'title' => $request->s_title[$i],
+                        'description' => $request->s_description[$i],
+                    ];
+                    if(!empty($request->s_image[$i])){
+                        deleteImage($objSol->image);
+                        $arrSol['image'] = storeImage($request->s_image[$i],'solution/screen-short');
                     }
+                    $objSol->update($arrSol);
+                }else{
+                    $arrSol = [
+                        'solution_id' => $id,
+                        'title' => $request->s_title[$i],
+                        'description' => $request->s_description[$i],
+                    ];
+                    if(!empty($request->s_image[$i])){
+                        $arrSol['image'] = storeImage($request->s_image[$i], 'solution/screen-short');
+                    }
+                    SolutionScreenshot::create($arrSol);
                 }
             }
         }
@@ -292,8 +286,8 @@ class SolutionRepository
 
     //Faq Update List
     public function faqListUpdate($id,$request){
-        if(isset($request->faq_id)){
-            Faq::where('type_id',$id)->whereNotIn('id',$request->faq_id)->delete();
+        if(isset($request->faqs_id)){
+            Faq::where('type_id',$id)->whereNotIn('id',$request->faqs_id)->delete();
         }
         $faqCount = count($request->faq_title);
         if($faqCount >= 1){
@@ -309,7 +303,7 @@ class SolutionRepository
                     if(isset($request->faq_title[$i])){
                         Faq::create([
                             'type_id' => $id,
-                            'type' => SolutionRepository::PORTFOLIO_TYPE,
+                            'type' => self::PORTFOLIO_TYPE,
                             'question' => $request->faq_title[$i],
                             'answer' => $request->faq_description[$i],
                         ]);

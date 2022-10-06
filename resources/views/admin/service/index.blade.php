@@ -1,7 +1,6 @@
 @extends('admin.layouts.include.master')
 <x-layout.index title="Service" :route="route('admin.service.create')">
     <th> # </th>
-    <th>Menu Title</th>
     <th>Title </th>
     <th>Created At</th>
     <th>Status </th>

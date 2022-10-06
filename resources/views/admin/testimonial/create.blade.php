@@ -5,9 +5,15 @@
         }else{
             $img = '';
         }
+        //only use for condition 
+        if($testimonial){
+            $data = $testimonial;
+        }else{
+            $data = '';
+        }
 @endphp
 @extends('admin.layouts.include.master')
-<x-layout.create title="Testimonial"  :action="$action" :backroute="route('admin.testimonial.index')">
+<x-layout.create title="Testimonial" :data="$data"  :action="$action" :backroute="route('admin.testimonial.index')">
     <x-form.input :name="__('name')" :lable="_('Name *')" :value="__($testimonial->name ?? old('name'))"/>
     <x-form.input :name="__('short_title')" :lable="_('Short Title *')" :value="__($testimonial->short_title ?? old('short_title'))"/>
     <x-form.input type="file" name="image" :defaultImage="$img" lable="Image" accept="image/*"  />

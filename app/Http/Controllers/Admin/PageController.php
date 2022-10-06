@@ -41,7 +41,7 @@ class PageController extends Controller
             $input['slug'] = slugify($input['slug']);
         }
        $this->pageRepository->createPage($input);
-        return back()->with('message', 'Successfully create Page ');
+        return back()->with('success', 'Successfully create Page ');
     }
 
     public function show($id)
@@ -64,7 +64,7 @@ class PageController extends Controller
             $input['slug'] = slugify($input['slug']);
         }
         $page->update($input);
-        return redirect()->route('admin.page.index')->with('message','Successfully Updated');
+        return redirect()->route('admin.page.index')->with('success','Successfully Updated');
     }
 
     public function destroy($id)

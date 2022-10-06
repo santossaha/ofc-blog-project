@@ -90,7 +90,7 @@ class DevelopmentTypeController extends Controller
     {
         $data = $this->devType->updateDev($request,$id);
         if($data){
-            return redirect()->route('admin.development-type.index')->with('message', 'Successfully Updated');
+            return redirect()->route('admin.development-type.index')->with('success', 'Successfully Updated');
         }else{
             errorBack();
         }

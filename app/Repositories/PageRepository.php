@@ -36,7 +36,7 @@ class PageRepository
     }
 
     public function dataTable(){
-        return DataTables::of($this->startQuery())
+        return DataTables::of($this->startQuery()->latest())
             ->addIndexColumn()
             ->addColumn('created_at', function($row) {
                 return date('d-m-Y',strtotime($row->created_at));

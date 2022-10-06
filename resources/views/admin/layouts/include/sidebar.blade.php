@@ -3,7 +3,7 @@
      <div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
          <div class="kt-aside__brand-logo">
              <a href="{{ route('admin.dashboard') }}" class="text-white text-center h4">
-                {{ config('settings.website_name') }}
+                 {{config('settings.website_name')}}
              </a>
          </div>
          <div class="kt-aside__brand-tools">

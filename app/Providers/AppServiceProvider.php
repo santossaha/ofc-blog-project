@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Admin\Setting;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //Config::set('project', Setting::firstOrFail());
+
         Schema::defaultStringLength(191);
     }
 }

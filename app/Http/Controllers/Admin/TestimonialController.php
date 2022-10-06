@@ -63,7 +63,7 @@ class TestimonialController extends Controller
     {
         $update =  $this->testimonialRepo->updateVal($id,$request);
         if($update){
-            return redirect()->route('admin.testimonial.index')->with('message', 'Successfully Updated');
+            return redirect()->route('admin.testimonial.index')->with('success', 'Successfully Updated');
         }else{
             errorBack();
         }

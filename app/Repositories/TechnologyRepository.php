@@ -75,7 +75,8 @@ class TechnologyRepository
     }
 
     public function insertServicePoint($id, $request){
-        $mxVal = $this->getRequestCount($request->s_title,$request->s_desription, $request->s_image);
+        //dd($request->all());
+        $mxVal = getRequestCount($request->s_title,$request->s_desription, $request->s_image);
         if ($mxVal >= 1) {
             for ($i = 0; $i < $mxVal; $i++) {
                 if(isset($request->s_image[$i])){
@@ -97,7 +98,7 @@ class TechnologyRepository
     }
 
     public function insertAppDev($id,$request){
-        $mxVal = $this->getRequestCount($request->a_title,$request->a_description, $request->a_image);
+        $mxVal = getRequestCount($request->a_title,$request->a_description, $request->a_image);
         if ($mxVal >= 1) {
             for ($i = 0; $i < $mxVal; $i++) {
                 if(isset($request->a_image[$i])){
@@ -109,7 +110,7 @@ class TechnologyRepository
                     'technology_id' => $id,
                     'title' => $request->a_title[$i]?? '',
                     'description' => $request->a_description[$i]?? '',
-                    'type' => TechnologyRepository::TECHNOLOGY_APP,
+                    'type' => self::TECHNOLOGY_APP,
                     'image' => $imageVal,
                 ];
                 TechnologyApp::create($arrTech);
@@ -118,10 +119,8 @@ class TechnologyRepository
     }
 
     public function insertExpress($id,$request){
-        if($request->e_title || $request->e_description){
-            $tVal = $request->e_title ? count($request->e_title) : 0;
-            $dVal = $request->e_description ? count($request->e_description) : 0;
-            $mxVal =  max([$tVal,$dVal]);
+        if($request->e_title){
+            $mxVal = $request->e_title ? count($request->e_title) : 0;
             if ($mxVal >= 1) {
                 for ($i = 0; $i < $mxVal; $i++) {
                     if(isset($request->e_image[$i])){
@@ -132,7 +131,7 @@ class TechnologyRepository
                     $arrTech = [
                         'technology_id' => $id,
                         'title' => $request->e_title[$i]?? '',
-                        'type' => TechnologyRepository::TECHNOLOGY,
+                        'type' => self::TECHNOLOGY,
                         'image' =>  $imageVal,
                     ];
                     TechnologyExpertise::create($arrTech);
@@ -201,7 +200,7 @@ class TechnologyRepository
         }
 
         //Update Service title description and image
-        $mxVal = $this->getRequestCount($request->s_title,$request->s_description, $request->s_image);
+        $mxVal = getRequestCount($request->s_title,$request->s_description, $request->s_image);
         if($mxVal >= 1){
             for ($i= 0; $i < $mxVal; $i++){
                 if(!empty($request->service_id[$i])){
@@ -243,7 +242,7 @@ class TechnologyRepository
         }
 
         //Update Service title description and image
-        $mxVal = $this->getRequestCount($request->a_title,$request->a_description, $request->a_image);
+        $mxVal = getRequestCount($request->a_title,$request->a_description, $request->a_image);
         if($mxVal >= 1){
             for ($i= 0; $i < $mxVal; $i++){
                 if(!empty($request->app_development_id[$i])){
@@ -262,6 +261,7 @@ class TechnologyRepository
                         'technology_id' => $id,
                         'title' => $request->a_title[$i],
                         'description' => $request->a_description[$i],
+                        'type' => self::TECHNOLOGY_APP,
                     ];
                     if(!empty($request->a_image[$i])){
                         $arrSol['image'] = storeImage($request->a_image[$i], 'technology/app-dev');
@@ -284,9 +284,9 @@ class TechnologyRepository
         }
 
         //Update Service title description and image
-        $tVal = $request->e_title ? count($request->e_title) : 0;
-        $dVal = $request->e_description ? count($request->e_description) : 0;
-        $mxVal =  max([$tVal,$dVal]);
+        $mxVal = $request->e_title ? count($request->e_title) : 0;
+        //$dVal = $request->e_description ? count($request->e_description) : 0;
+        //$mxVal =  max([$tVal,$dVal]);
         if($mxVal >= 1){
             for ($i= 0; $i < $mxVal; $i++){
                 if(!empty($request->expertise_id[$i])){

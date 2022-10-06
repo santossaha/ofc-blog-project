@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin\Setting;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Solution;
@@ -134,6 +135,13 @@ function techTypeId($id){
     return $ids;
 }
 
+function getRequestCount($ti, $des,$img){
+    $tVal = $ti ? count($ti) : 0;
+    $dVal = $des ? count($des) : 0;
+    $iVal = $img ? count($img) : 0;
+    return  max([$tVal,$dVal,$iVal]);
+}
+
 
 
 function solutionTechnologyTypeIds($id)
@@ -193,6 +201,18 @@ function readMore($string, $num=75)
     $string = strip_tags($string);
     return strlen($string) > $num ? substr($string,0,$num)."..." : $string;
 }
+
+function projName(){
+    $projName = Setting::select('website_name')->firstOrFail();
+    return $projName->website_name;
+}
+
+function favicon_icon(){
+    $projName = Setting::select('favicon_icon')->firstOrFail();
+    return $projName->favicon_icon;
+}
+
+
 
 
 

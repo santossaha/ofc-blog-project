@@ -13,7 +13,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="shortcut icon" href="{{!blank(config('settings.favicon_icon'))?getImage(config('settings.favicon_icon')):null }}" />
+    <link rel="shortcut icon" href="{{!blank(config('project.favicon_icon'))?getImage(config('project.favicon_icon')):null }}" />
     <!-- Styles -->
     @include('admin.layouts.include.style')
 

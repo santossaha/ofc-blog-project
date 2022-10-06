@@ -27,6 +27,7 @@
                     @if(!empty(old('tech_type[]')) && in_array($techType->id, old('tech_type[]')))
                         <option selected value="{{ $techType->id }}">{{ $techType->name }}</option>
                     @endif
+                        <option @if($key == 0) selected @endif value="{{ $techType->id }}">{{ $techType->name }}</option>
                 @endforeach
             </select>
         </div>

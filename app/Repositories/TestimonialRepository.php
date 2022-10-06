@@ -47,7 +47,7 @@ class TestimonialRepository
         try {
             $update = $this->startQuery()->findOrFail($id);
             $input = $request->all();
-            if ($request->image) {
+            if ($request->hasFile('image')) {
                 deleteImage($update->image);
                 $image = storeImage($request->image, 'testimonial');
                 $input['image'] = $image;

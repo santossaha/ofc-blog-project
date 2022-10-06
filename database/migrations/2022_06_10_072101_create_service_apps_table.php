@@ -16,9 +16,7 @@ class CreateServiceAppsTable extends Migration
         Schema::create('service_apps', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('service_id');
-            $table->foreign('service_id')->references('id')->on('services');
             $table->string('title')->nullable();
-            $table->string('short_title')->nullable();
             $table->string('image')->nullable();
             $table->string('alt_image')->nullable();
             $table->text('description')->nullable();

@@ -11,90 +11,24 @@ var Service = function () {
                 slug:{
                     required: true,
                 },
-                meta_title: {
-                    required: true,
-                },
-                meta_keyword:{
-                    required: true,
-                },
-                meta_description:{
-                    required: true,
-                },
-                meta_robots: {
-                    required: true,
-                },
-                short_description:{
-                    required: true,
-                },
-                home_description: {
-                    required: true,
-                },
-                about_title:{
-                    required: true,
-                },
-                discount:{
-                    required: true,
-                },
-                benefit_head_title:{
-                    required: true,
-                },
-                benefit_head_description:{
-                    required: true,
-                },
-                feature_head_title:{
-                    required: true,
-                },
-                hire_head_title:{
-                    required: true,
-                },
-                hire_head_description:{
-                    required: true,
-                },
-                // 'sf_title[]': {
-                //     required: true,
-                // },
-                // 'se_title[]': {
-                //     required: true,
-                // },
-                // 's_title[]': {
-                //     required: true,
-                // },
-                // 'faq_question[]': {
-                //     required: true,
-                // },
             },
             submitHandler: function(form) {
                 form.submit();
             }
         });
 
-       // $('.summernote').summernote({height: 200});
-        // image uplade file
+        //CKEditorInit();
         $('[type="file"]').dropify();
-
-        $("body").on("click", ".benefit-btn-remove", function() {
-            $(this).parents(".hide_benefit").remove();
+        //Done
+        $("body").on("click", ".app-development-btn-remove", function() {
+            $(this).parents(".hide_app_development").remove();
         });
-
-        $("body").on("click", ".feature-btn-remove", function() {
-            $(this).parents(".hide_feature").remove();
-        });
-
-        $("body").on("click", ".expertise-btn-remove", function() {
-            $(this).parents(".hide_expertise").remove();
-        });
-
         // remove Servce app  filde data
 
         $("body").on("click", ".service-btn-remove", function() {
             $(this).parents(".hide_service").remove();
         });
 
-        //  add more  faq input  filed
-        // $(".btn-add-faq-more").click(function() {
-        //     var html = $(".hide_faq_div").html();
-        //     $(".faq_row_div").append(html);
-        // });
          // remove FAQ filde data
         $("body").on("click", ".faq-btn-remove", function() {
             $(this).parents(".hide_faq").remove();
@@ -114,68 +48,28 @@ var Service = function () {
                 slug:{
                     required: true,
                 },
-                meta_title: {
-                    required: true,
-                },
-                meta_keyword:{
-                    required: true,
-                },
-                meta_description:{
-                    required: true,
-                },
-                meta_robots: {
-                    required: true,
-                },
-                app_dev_title:{
-                    required: true,
-                },
-                short_description:{
-                    required: true,
-                },
-                home_description: {
-                    required: true,
-                },
-                about_title:{
-                    required: true,
-                },
-                discount:{
-                    required: true,
-                },
-                's_title[]': {
-                    required: true,
-                },
-                'faq_question[]': {
-                    required: true,
-                },
             },
             submitHandler: function(form) {
                 form.submit();
             }
         });
 
-        //$('textarea.summernote').summernote({height: 150});
+        //CKEditorInit();
         // image uplade file
         $('[type="file"]').dropify();
 
-        $("body").on("click", ".benefit-btn-delete", function() {
-            $(this).parents(".delete_benefit").remove();
-        });
 
-        $("body").on("click", ".feature-btn-delete", function() {
-            $(this).parents(".delete_feature").remove();
-        });
-
-        $("body").on("click", ".expertise-btn-delete", function() {
-            $(this).parents(".delete_expertise").remove();
+        $("body").on("click", ".app-development-btn-delete", function() {
+            $(this).parents(".delete_app_development").remove();
         });
 
         // remove Servce app  filde data
-        $("body").on("click", ".service-btn-remove", function() {
-            $(this).parents(".hide_service").remove();
+        $("body").on("click", ".service-btn-delete", function() {
+            $(this).parents(".delete_service").remove();
         });
 
-        $("body").on("click", ".faq-btn-remove", function() {
-            $(this).parents(".hide_faq").remove();
+        $("body").on("click", ".faq-btn-delete", function() {
+            $(this).parents(".delete_faq").remove();
         });
 
 
@@ -244,10 +138,6 @@ var Service = function () {
             ajax: aurl+"service",
             columns: [{
                     data: 'DT_RowIndex'
-                },
-                {
-                    data: 'home_description',
-                    name: 'home_description',
                 },
                 {
                     data: 'title',
